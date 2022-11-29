@@ -2,6 +2,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.invocation.InvocationOnMock;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import java.time.LocalTime;
 import static org.junit.jupiter.api.Assertions.*;
@@ -57,4 +62,32 @@ class RestaurantTest {
         assertThrows(itemNotFoundException.class, ()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+    //>>>>>>>>>>>>>>>>>>>>>>>Order Total<<<<<<<<<<<<<<<<<<<<<<
+
+    @Test
+    public void total_should_be_zero_if_no_items_are_selected(){
+        int total = restaurant.get_order_total(null);
+        assertEquals(0, total);
+    }
+
+
+    @Test
+    void total_should_388_if_both_items_are_selected(){
+        ArrayList<String> selectedItems = new ArrayList<String>();
+        selectedItems.add("Sweet corn soup");
+        selectedItems.add("Vegetable lasagne");
+        int total = restaurant.get_order_total(selectedItems);
+        assertEquals(388, total);
+    }
+
+    @Test
+    void total_should_119_if_sweet_corn_is_selected(){
+        ArrayList<String> selectedItems = new ArrayList<String>();
+        selectedItems.add("Sweet corn soup");
+        int total = restaurant.get_order_total(selectedItems);
+        assertEquals(119, total);
+    }
+
 }

@@ -1,6 +1,9 @@
+import org.jetbrains.annotations.Nullable;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Restaurant {
@@ -60,6 +63,17 @@ public class Restaurant {
 
     public String getName() {
         return name;
+    }
+
+    public int get_order_total(ArrayList<String> items){
+        int total = 0;
+        if(items != null && items.size() > 0){
+            for(String x: items){
+                Item item = this.findItemByName(x);
+                if(item != null) total += item.get_price();
+            }
+        }
+        return total;
     }
 
 }
