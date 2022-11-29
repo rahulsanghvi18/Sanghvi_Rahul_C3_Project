@@ -1,13 +1,15 @@
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RestaurantService {
     private static List<Restaurant> restaurants = new ArrayList<>();
 
-    public Restaurant findRestaurantByName(String restaurantName){
-        return null;
-        //DELETE ABOVE STATEMENT AND WRITE CODE HERE
+    public Restaurant findRestaurantByName(String restaurantName) throws restaurantNotFoundException{
+        List<Restaurant> filteredList = restaurants.stream().filter(restaurant -> restaurant.getName().equals(restaurantName)).collect(Collectors.toList());
+        if(filteredList.isEmpty()) throw new restaurantNotFoundException(restaurantName);
+        return filteredList.get(0);
     }
 
 
