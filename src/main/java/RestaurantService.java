@@ -9,7 +9,7 @@ public class RestaurantService {
     public Restaurant findRestaurantByName(String restaurantName) throws restaurantNotFoundException{
         List<Restaurant> filteredList = restaurants.stream().filter(restaurant -> restaurant.getName().equals(restaurantName)).collect(Collectors.toList());
         if(filteredList.isEmpty()) throw new restaurantNotFoundException(restaurantName);
-        return filteredList.get(0);
+        return filteredList.get(filteredList.size() - 1);
     }
 
 
